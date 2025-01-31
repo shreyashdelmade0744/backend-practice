@@ -1,0 +1,14 @@
+{
+  "name": "backend_pro",
+  "version": "1.0.0",
+  "description": "my first backend project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "shreyash delmade",
+  "license": "ISC"
+}
