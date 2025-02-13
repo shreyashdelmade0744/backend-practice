@@ -1,0 +1,3 @@
+bcrpty for password
+aggreggation pipeline to perform crud operations and much more in mongo db 
+jwt is bearer token , that is who so ever has this token , is right person
