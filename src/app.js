@@ -18,5 +18,11 @@ app.use(express.urlencoded({extended:true,limit:"16kb"}))
 app.use(express.static("public"))//public naam ke repo mein bss pdf files ya kuch apne he server mein public repo mein store hoga
 app.use(cookieParser())//to perform crud operation on cookie of browser
 
+//routes import
+import userRouter from "./routes/user.routes.js"
 
-export {app}
+//routes declaration 
+app.use("/api/v1/users",userRouter)
+
+
+export default app
