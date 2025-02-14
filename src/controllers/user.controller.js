@@ -20,15 +20,13 @@ const registerUser = asyncHandler(async(req , res) => {
 const {fullname,email,username,password} = req.body
 
 //now we will validate whether all fields are filled or empty 
-if([fullname,email,username,password].some((field_iterator)=>{
-   return field_iterator.trim() === ""
-})){
+if([fullname,email,username,password].some((field_iterator)=>field_iterator.trim() === "")){
     throw new ApiError(400,"all fields are required")
 }
 
 //check is username , email already exist or not
 //it is like or operation on database to see if we get either of these
-const existedUser= User.findOne({
+const existedUser = await User.findOne({
     $or : [{ username },{ email }]
 })
 
@@ -37,15 +35,21 @@ if(existedUser){
 }
 
 const avatarLocalPath = req.files?.avatar[0]?.path 
-const coverImageLocalPath = req.files?.coverImage[0]?.path 
+// const coverImageLocalPath = req.files?.coverImage[0]?.path 
+
+let coverImageLocalPath; 
+if(req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0){
+    coverImageLocalPath = req.files.coverImage[0].path
+}
 
 if(!avatarLocalPath){
     throw new ApiError(400,"avatar image is required")
 }
 
 //now we got the local path , lets upload it on cloudinary 
-const avatar = await uploadOnCloudinary(avatarLocalPath)
-const coverImage = await uploadOnCloudinary(coverImageLocalPath)
+const avatar = await uploadOnCloudinary(avatarLocalPath);
+const coverImage = await uploadOnCloudinary(coverImageLocalPath) 
+
 
 if(!avatar){
     throw new ApiError(400,"avatar image is required")
@@ -55,7 +59,7 @@ if(!avatar){
 const user = await User.create({
     fullname, 
     avatar : avatar.url,
-    coverImage : coverImage?.url || "",
+    coverimage : coverImage?.url || "",
     email,
     password,
     username : username.toLowerCase()
@@ -73,9 +77,8 @@ if(!createdUser){
 //now we will try to frame response 
 
 return res.status(200).json(
-    new ApiResponse(200,createdUser,"user registered successfuly")
+    new ApiResponse(200,user,"user registered successfuly") 
 )
-
 
 })
 
