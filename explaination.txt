@@ -7,7 +7,6 @@ we will use multer to take file from user , store it in local server for some ti
 of cloudanary we will upload it to the cloud/or aws 
 
 
-
 GET : retrieve a resoure
 HEAD : No message body (response headers only)
 OPTIONS: what operations are available
@@ -25,10 +24,9 @@ Http status code
 4xx - Client Error
 5xx - Server Error
 
-
-
-
 for user controller
+
+for registering the user:-
 
 // get user details from frontend
 // validation - not empty
@@ -39,6 +37,15 @@ for user controller
 // remove password and refresh token field from response
 // check for user creation
 // return res
+
+to login a User :-
+
+get data from req.body;
+take username or email 
+find the user
+check for password
+access and refresh token 
+send cookie
 
 
 
