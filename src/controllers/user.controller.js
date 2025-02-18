@@ -1,12 +1,10 @@
-import { asyncHandler } from '../utils/asynchandler.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
 import { ApiError } from '../utils/ApiError.js';
 import { User } from '../models/user.model.js';
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 import jwt from 'jsonwebtoken';
-import { json } from 'express';
 import mongoose from 'mongoose';
-import { use } from 'bcrypt/promises.js';
 
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
