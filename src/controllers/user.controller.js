@@ -409,6 +409,16 @@ const getWatchHistory = asyncHandler(async (req, res) => {
 });//working
 
 
+//just trying out with api
+// https://randomuser.me/api/
+
+const getRandomUser = asyncHandler(async(req,res)=>{
+  const response = await fetch('https://randomuser.me/api/')
+  const data = await response.json();
+  const gen = data.results[0]?.gender
+  return res.status(200).json(new ApiResponse(220,{gen},"noice"))
+})
+
 
 export {
   registerUser,
@@ -421,5 +431,6 @@ export {
   updateUserAvatar,
   updateUserCoverImage,
   getUserChannelProfile,
-  getWatchHistory
+  getWatchHistory,
+  getRandomUser
 };

@@ -11,6 +11,7 @@ import {
   getUserChannelProfile,
   getCurrentUser,
   getWatchHistory,
+  getRandomUser
 } from '../controllers/user.controller.js';
 import upload from '../middlewares/multer.middleware.js';
 import { verifyJWT } from '../middlewares/auth.middleware.js';
@@ -43,5 +44,8 @@ router.route('/avatar').patch(verifyJWT, upload.single('avatar'), updateUserAvat
 router.route('/cover-image').patch(verifyJWT, upload.single('coverimage'), updateUserCoverImage);
 router.route('/c/:username').get(verifyJWT, getUserChannelProfile);
 router.route('/history').get(verifyJWT, getWatchHistory);
+
+
+router.route('/getrandi').get(getRandomUser)
 
 export default router;
